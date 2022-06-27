@@ -1,5 +1,5 @@
-import React from 'react';
-import './Registers.css';
+import './index';
+import React, { useEffect, useState } from "react";
 
 
 
@@ -21,7 +21,7 @@ function Registers({ list = [] }){
           {
           list.map( ({ id, nome, email, telefone }) => {
 
-        return <tr>
+        return <tr key={id}>
                <td>{id}</td>
                <td>{nome}</td>
                <td>{email}</td>
@@ -34,7 +34,27 @@ function Registers({ list = [] }){
         </tbody>
        </table>
 
+
 }
 
+function App() {
 
-export default Registers;
+
+    var [ list, setList ] = useState( [] )
+
+        useEffect( () => {
+
+            fetch('http://localhost:3000/contatos')
+            .then (async result => {
+                setList(await result.json() )
+            })
+
+        }, [] )
+
+    return <div>
+        <Registers list={list} />
+    </div>
+
+}
+
+export default App;
