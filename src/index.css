@@ -6,3 +6,13 @@ table th, table td{
     padding: 10px;
     text-align: left;
 }
+
+table th {
+    cursor: pointer;
+}
+
+input {
+    padding: 10px;
+    border: solid 2px;
+    width: 100%;
+}
