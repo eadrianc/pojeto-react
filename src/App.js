@@ -1,58 +1,68 @@
 import './index';
 import React, { useEffect, useState } from "react";
 
+function Item ({item}){
+    const{ id, nome, email, telefone } = item;
 
+    return<>
+    <tr key={id}>
+               <td>{id}</td>
+               <td>{nome}</td>
+               <td>{email}</td>
+               <td>{telefone}</td>
+               <td>
+                <button className='red'>Apagar</button>
+               </td>
+               </tr>
+               <tr>
+                <td colSpan='3'>
+
+                </td>
+               </tr>
+    </>
+}
 
 function Registers({ list = [] }){
 
     const [order, setOrder] = useState(1)
     const [colunmOrder, setColunmOrder] = useState('nome')
-    const [filter, setfilter] = useState ('')
+    const [filter, setFilter] = useState ('')
 
     const handleOrder = fieldName => {
         setOrder(-order)
         setColunmOrder(fieldName)
     }
 
-    list = list.sort((a, b) => {
+    list = list.sort( (a, b) => {
         return a[colunmOrder] < b[colunmOrder] ? -order : order ;
     })
 
-    if(filter)
-    list = list.filter( item =>
-        item.nome.tolowerCase().indexOf(filter.tolowerCase())
-        )
-
+    if(filter){
+        const exp = eval(`/${filter.replace(/[^\d\w]+/,'.*')}/i`)
+        list=list.filter(item=> exp.test(item.nome))
+        }
+    
         const handleFilter = e => {
-             setfilter( e.target.value)
+             setFilter( e.target.value)
         }
 
 
     return <div>
-        <input placeholder='Pesquisar' onChange={handleFilter} />
+        <input placeholder='PESQUISAR' onChange={handleFilter} />
      <table>
         <thead>
             <tr>
-                <th onClick={e => handleOrder('id')}>Id</th>
-                <th onClick={e => handleOrder('nome')}>Nome</th>
-                <th onClick={e => handleOrder('email')}>Email</th>
-                <th onClick={e => handleOrder('telefone')}>Telefone</th>
+                <th onClick={ e => handleOrder('id') }>Id</th>
+                <th onClick={ e => handleOrder('nome') }>Nome</th>
+                <th onClick={ e => handleOrder('email') }>Email</th>
+                <th onClick={ e => handleOrder('telefone') }>Telefone</th>
             </tr>
 
         </thead>
         <tbody>
 
           {
-          list.map( ({ id, nome, email, telefone }) => {
-
-        return <tr key={id}>
-               <td>{id}</td>
-               <td>{nome}</td>
-               <td>{email}</td>
-               <td>{telefone}</td>
-               </tr>
-
-            } )
+          list.map( item => <Item item={item} />)
 
            }
         </tbody>
