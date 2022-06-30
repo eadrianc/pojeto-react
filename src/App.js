@@ -1,17 +1,21 @@
 import './index';
 import React, { useEffect, useState } from "react";
 
-function Item ({item}){
+function Item ({item, handleDelete}){
+
+
     const{ id, nome, email, telefone } = item;
 
+
     return<>
+
     <tr key={id}>
                <td>{id}</td>
                <td>{nome}</td>
                <td>{email}</td>
                <td>{telefone}</td>
                <td>
-                <button className='red'>Apagar</button>
+                <button className='red' onClick={ e => handleDelete(id)}>Apagar</button>
                </td>
                </tr>
                <tr>
@@ -22,7 +26,7 @@ function Item ({item}){
     </>
 }
 
-function Registers({ list = [] }){
+function Registers({ list = [], handleDelete }){
 
     const [order, setOrder] = useState(1)
     const [colunmOrder, setColunmOrder] = useState('nome')
@@ -62,7 +66,7 @@ function Registers({ list = [] }){
         <tbody>
 
           {
-          list.map( item => <Item item={item} />)
+          list.map( item => <Item item={item}  handleDelete={handleDelete}/>)
 
            }
         </tbody>
@@ -77,6 +81,12 @@ function App() {
 
     var [ list, setList ] = useState( [] )
 
+    const handleDelete = id => {
+          setList( list.filter(item => item.id !== id))
+    }
+        
+    
+
         useEffect( () => {
 
             
@@ -90,7 +100,7 @@ function App() {
         }, [] )
 
     return <div>
-        <Registers list={list} />
+        <Registers list={list}  handleDelete={handleDelete}/>
     </div>
 
 }

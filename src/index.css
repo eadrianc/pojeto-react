@@ -1,5 +1,5 @@
 body{
-    background-color: aliceblue ;
+    background: linear-gradient(90deg, #cedee0 0%, #accaca);
 }
 
 table{
@@ -12,8 +12,15 @@ table th, table td{
 }
 
 
+
 table th {
     cursor: pointer;
+}
+
+button{
+    padding: 10px 15px;
+    background-color: #07a;
+    color: #fff;
 }
 
 input {
