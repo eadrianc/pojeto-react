@@ -1,22 +1,28 @@
 {
-  "contatos": [
+  "contacts": [
     {
       "id": 1,
-      "nome": "John Doe",
+      "name": "John Doe",
       "email": "john@doe.email",
       "telefone": "1111-1111"
     },
     {
       "id": 2,
-      "nome": "Foo Bar",
+      "name": "Foo Bar",
       "email": "john@doe.email",
       "telefone": "2222-2222"
     },
     {
       "id": 3,
-      "nome": "Alice and Bob",
+      "name": "Alice and Bob",
       "email": "john@doe.email",
       "telefone": "3333-3333"
+    },
+    {
+      "id": "9fa7d32c-b33f-4a95-a9ca-8270eafcccaa",
+      "name": "adrian",
+      "email": "edgarcampos206@gmail.com",
+      "telefone": "222227777"
     }
   ]
 }
